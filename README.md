@@ -16,4 +16,10 @@ para mandar mensagem esse bot precisa de:
 - 
 - Uma planilha com números 
 - Um número princial que ele mandara mensagem pra verificar se os numeros existem
+
+
+
+caminho google 
+
+chrome://version/
   
