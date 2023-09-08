@@ -1,5 +1,5 @@
 import time
-
+import pickle
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,20 +8,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 
-options = webdriver.ChromeOptions()
-#options.add_argument("--headless=new")
-caminho_nav = r"user-data-dir=C:\Users\gabri\AppData\Local\Temp\scoped_dir10596_811454473"
-options.add_argument(caminho_nav)
-driver = webdriver.Chrome(options=options)
 
+def comecar():
+    driver = webdriver.Chrome()
+    driver.get('https://web.whatsapp.com/')
+    time.sleep(25)
 
-
-
-
-
-driver.get('https://web.whatsapp.com/')
-
-time.sleep(25)
 
 
 #C:\Users\gabri\AppData\Local\Temp\scoped_dir10596_811454473\Default
