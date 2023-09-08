@@ -10,6 +10,7 @@ Antes de começar a usar este projeto, certifique-se de ter os seguintes pré-re
  - selenium import webdriver
  - selenium
  - import pandas as pd
+ - pickle
 
 para mandar mensagem esse bot precisa de:
 - 
