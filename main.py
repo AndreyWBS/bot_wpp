@@ -22,7 +22,7 @@ def comecar(caminho, ativo, dados):
     sele.procurarElementocomSeletor("#app > div > div > div._2Ts6i._3RGKj > header > div._3WByx")
 
 
-    #time.sleep(25)
+    time.sleep(5)
 
 
 caminho = dados['caminho_drive']
