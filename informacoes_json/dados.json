@@ -2,6 +2,7 @@
   "numeroPrincipal": "",
   "caminhoPlanilha": "",
   "mensagem": "",
-  "caminh_drive": ""
+  "caminh_drive": "drives",
+  "ativo": "teste"
 
 }

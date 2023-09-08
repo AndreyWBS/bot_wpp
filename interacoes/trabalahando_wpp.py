@@ -9,7 +9,8 @@ import pandas as pd
 import json
 
 with open('../informacoes_json/dados_wpp.json', 'r') as arquivo:
-    dados = json.load(arquivo)
+    dados_Wpp = json.load(arquivo)
 
-print(dados)
+print(dados_Wpp)
+
 
