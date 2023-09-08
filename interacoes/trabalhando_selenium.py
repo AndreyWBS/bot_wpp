@@ -47,6 +47,7 @@ class Guardar_drive():
         print("deu bom")
 
     def iniciando_drive(self):
+        #TODO: escrver em json o dirr user-data-dir={valor}
         if len(self.caminho) < 1:
             driver = webdriver.Chrome()
         else:
