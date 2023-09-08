@@ -75,14 +75,11 @@ class Guardar_drive():
     def iniciando_drive(self):
         # TODO: escrver em json o dirr user-data-dir={valor}
         perfil = "\Profile 2"
-        try:
-            options = webdriver.ChromeOptions()
-            # options.add_argument("--headless=new")
-            caminho_nav = f"user-data-dir={self.caminho}"
-            options.add_argument(caminho_nav)
-            driver = webdriver.Chrome(options=options)
-            return driver
-        except Exception as e:
-            driver = salvando_drive()
 
-            return driver
+
+        options = webdriver.ChromeOptions()
+        # options.add_argument("--headless=new")
+        caminho_nav = f"user-data-dir={self.caminho}\\{self.ativo}"
+        options.add_argument(caminho_nav)
+        driver = webdriver.Chrome(options=options)
+        return driver
