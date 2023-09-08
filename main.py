@@ -15,16 +15,17 @@ with open('informacoes_json/dados.json', 'r') as arquivo:
 
 
 def comecar(caminho, ativo, dados):
-    guarda_drive = Guardar_drive(caminho, ativo)
+    guarda_drive = Guardar_drive(caminho, ativo, dados)
     driver = guarda_drive.iniciando_drive()
     sele = UsarSele(driver)
     driver.get('https://web.whatsapp.com/')
     sele.procurarElementocomSeletor("#app > div > div > div._2Ts6i._3RGKj > header > div._3WByx")
-    guarda_drive.fechando_drive(driver)
-    time.sleep(25)
 
 
-caminho = dados['caminh_drive']
+    #time.sleep(25)
+
+
+caminho = dados['caminho_drive']
 ativo = dados['ativo']
 
 comecar(caminho, ativo, dados)
