@@ -1,3 +1,4 @@
+import pickle
 import time
 
 from selenium import webdriver
@@ -42,17 +43,18 @@ class usarSele:
         driver.find_element(By.CSS_SELECTOR, seletor).send_keys(Keys.ENTER)
 
 
-def gerarPLanilahas(nomeWPP, planilha_de_numeros_Erro,planilha_de_numeros_env):
-    df_Planilha_com_ERRO = pd.DataFrame(planilha_de_numeros_Erro)
-    df_Planilha_com_ENV = pd.DataFrame(planilha_de_numeros_env)
-    nome_env = f"{nomeWPP}numeros_env.xlsx"
-    nome_erro = f"{nomeWPP}numeros_erros.xlsx"
-    caminho_planilha = r"C:\Users\Micro\Desktop\planilhasGeradasBOT\acionamentosWPP\pla"
+class guardar_drive:
+    def iniciando_drive(self, caminho):
+        try:
+            with open(f'{caminho}driver.pkl', 'rb') as driver_file:
+                driver = pickle.load(driver_file)
+        except FileNotFoundError:
+            driver = webdriver.Chrome()
 
-    df_Planilha_com_ERRO.to_excel(caminho_planilha + nome_erro, index=False)
-    df_Planilha_com_ENV.to_excel(caminho_planilha + nome_env, index=False)
+        return driver
 
 
-def obterPrimeiraLinha(texto):
-    linhas = texto.split("\n")
-    return linhas[0]
+    def fechando_drive(self, driver, caminho):
+        with open(f'{caminho}driver.pkl', 'wb') as driver_file:
+            pickle.dump(driver, driver_file)
+
