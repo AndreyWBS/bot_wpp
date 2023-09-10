@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 from interacoes.trabalhando_selenium import UsarSele
+from interacoes.trabalhando_wpp import UsarSele
 import json
 
 with open('informacoes_json/dados.json', 'r') as arquivo:

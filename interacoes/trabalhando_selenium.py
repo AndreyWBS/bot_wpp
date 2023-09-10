@@ -11,10 +11,8 @@ import json
 import pandas as pd
 
 
-
-
 class UsarSele:
-    def __init__(self,caminho, ativo, dados="a"):
+    def __init__(self, caminho, ativo, dados="a"):
         self.ativo = ativo
         self.caminho = caminho
         self.dados = dados
@@ -23,8 +21,6 @@ class UsarSele:
         options.add_argument(caminho_nav)
         self.driver = webdriver.Chrome(options=options)
         print("iniciado")
-
-
 
     def iniciando_drive(self):
         return self.driver
@@ -53,8 +49,3 @@ class UsarSele:
             else:
                 self.driver.find_element(By.CSS_SELECTOR, seletor).send_keys(letra)
         self.driver.find_element(By.CSS_SELECTOR, seletor).send_keys(Keys.ENTER)
-
-
-
-
-
