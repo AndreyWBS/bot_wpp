@@ -40,6 +40,7 @@ class UsarSele:
         elemento = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, seletor)))
         elementoP.find_element(By.CSS_SELECTOR, seletor).click()
 
+
     def escrever(self, seletor, txt):
         wait = WebDriverWait(self.driver, 25)
         elemento = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, seletor)))
