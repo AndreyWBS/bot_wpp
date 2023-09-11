@@ -61,7 +61,9 @@ def mandar_mensagem_por_numero(novo_wpp, numeros):
         novo_wpp.clicar_conversa(numero_principal)
         novo_wpp.escrever_mensagem_txt(str(numero))
         novo_wpp.clicar_numero(str(numero))
-        novo_wpp.clicar_conversar_com()
+        if novo_wpp.clicar_conversar_com():
+            continue
+
 
         bom = pegar_bom()
         novo_wpp.escrever_mensagem_txt2(bom)

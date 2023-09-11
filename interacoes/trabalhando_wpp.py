@@ -65,6 +65,12 @@ class Wpp:
                 self.Usersele.clicar_seletor_elemento( self.mensagem_link, linha)
                 break
     def clicar_conversar_com(self):
-        conversar_com = self.Usersele.procurarElementocomSeletor(self.conversar_com)
-        if conversar_com.get_attribute("aria-label") == "Conversar com ":
-            conversar_com.click()
+        try:
+            conversar_com = self.Usersele.procurarElementocomSeletor(self.conversar_com)
+            if conversar_com.get_attribute("aria-label") == "Conversar com ":
+                conversar_com.click()
+                return False
+        except:
+            return True
+
+        return True
