@@ -1,9 +1,7 @@
 import json
 import time
 import datetime
-
 import pandas as pd
-
 from interacoes.trabalhando_selenium import UsarSele
 from interacoes.trabalhando_wpp import Wpp
 from interacoes.trabalhando_planilhas import Planilhas
@@ -26,7 +24,7 @@ def pegar_bom():
 
 
 def verificar_colunas(planilha_df):
-    print(planilha_df.columns)
+    #print(planilha_df.columns)
     return planilha_df.columns
 
 
@@ -36,8 +34,8 @@ def salvar_palinlha(planilha_df, ativo):
     for coluna in verificar_colunas(planilha_df):
         nova_planilha[str(coluna)] = []
     nova_planilha_df = Planilhas()
-    print(nova_planilha)
-    novo_caminho = nova_planilha_df.gerar_Planilhas(nova_planilha, ativo, caminho)
+    #print(nova_planilha)
+    novo_caminho = nova_planilha_df.gerar_planilhas(nova_planilha, ativo, caminho)
     return novo_caminho
 
 
@@ -45,9 +43,9 @@ def atualizar_planilha(caminho, index, planilha_df):
     trabalhando_planilhas = Planilhas()
     for i, coluna in enumerate(verificar_colunas(planilha_df)):
         valor_atual = str(planilha_df.loc[index, coluna])
-        coluna_letra = chr(65 + i )
+        coluna_letra = chr(65 + i)
 
-        trabalhando_planilhas.atualizando_planilhas(caminho, coluna_letra, (index+2), valor_atual)
+        trabalhando_planilhas.atualizando_planilhas(caminho, coluna_letra, (index + 2), valor_atual)
 
 
 def mandar_mensagem_por_numero(novo_wpp, numeros):
@@ -60,15 +58,16 @@ def mandar_mensagem_por_numero(novo_wpp, numeros):
     for i, numero in enumerate(numeros['numero']):
         novo_wpp.clicar_conversa(numero_principal)
         novo_wpp.escrever_mensagem_txt(str(numero))
-        novo_wpp.clicar_numero(str(numero))
+
+        if not novo_wpp.clicar_numero(str(numero)):
+            continue
         if novo_wpp.clicar_conversar_com():
             continue
-
 
         bom = pegar_bom()
         novo_wpp.escrever_mensagem_txt2(bom)
         novo_wpp.escrever_mensagem_txt2(mensagem)
-        # TODO: colocar pra verificarse tem nome ou algo a mais na planilha pode ser no proio ttrabalhano com planilhas
+
         atualizar_planilha(novo_caminho, i, numeros)
 
         time.sleep(5)
@@ -88,7 +87,6 @@ def comecar(dados_json):
     novo_wpp = Wpp(driver_)
     numeros = pd.read_excel(caminho_planilha)
 
-    # TODO: gerar uma função a partir  daqui
     mandar_mensagem_por_numero(novo_wpp, numeros)
 
 
