@@ -45,6 +45,7 @@ def atualizar_planilha(caminho, index, planilha_df):
 
 
 def mandar_mensagem_por_numero(novo_wpp, numeros, dados):
+    global mensagem2
     numero_principal = dados["numeroPrincipal"]
     mensagem = dados["mensagem"]
 
