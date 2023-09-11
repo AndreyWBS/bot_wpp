@@ -6,8 +6,6 @@ from interacoes.trabalhando_selenium import UsarSele
 from interacoes.trabalhando_wpp import Wpp
 from interacoes.trabalhando_planilhas import Planilhas
 
-with open('informacoes_json/dados.json', 'r', encoding='utf-8') as arquivo:
-    dados = json.load(arquivo)
 
 
 def pegar_bom():
@@ -48,7 +46,7 @@ def atualizar_planilha(caminho, index, planilha_df):
         trabalhando_planilhas.atualizando_planilhas(caminho, coluna_letra, (index + 2), valor_atual)
 
 
-def mandar_mensagem_por_numero(novo_wpp, numeros):
+def mandar_mensagem_por_numero(novo_wpp, numeros,dados):
     numero_principal = dados["numeroPrincipal"]
     mensagem = dados["mensagem"]
     ativo = dados["ativo"]
@@ -73,21 +71,24 @@ def mandar_mensagem_por_numero(novo_wpp, numeros):
         time.sleep(5)
     pass
 
+class inicio:
+    def __init__(self,dados_json):
+        self.dados_json = dados_json
 
-def comecar(dados_json):
-    caminho_planilha = dados_json["caminhoPlanilha"]
+    def comecar_(self):
+        caminho_planilha = self.dados_json["caminhoPlanilha"]
 
-    caminho_drive = dados_json["caminho_drive"]
-    ativo = dados_json["ativo"]
+        caminho_drive = self.dados_json["caminho_drive"]
+        ativo = self.dados_json["ativo"]
 
-    driver_ = UsarSele(caminho_drive, ativo, dados_json)
-    driver = driver_.iniciando_drive()
+        driver_ = UsarSele(caminho_drive, ativo, self.dados_json)
+        driver = driver_.iniciando_drive()
 
-    driver.get('https://web.whatsapp.com/')
-    novo_wpp = Wpp(driver_)
-    numeros = pd.read_excel(caminho_planilha)
+        driver.get('https://web.whatsapp.com/')
+        novo_wpp = Wpp(driver_)
+        numeros = pd.read_excel(caminho_planilha)
 
-    mandar_mensagem_por_numero(novo_wpp, numeros)
+        mandar_mensagem_por_numero(novo_wpp, numeros,self.dados_json)
 
 
-comecar(dados)
+
