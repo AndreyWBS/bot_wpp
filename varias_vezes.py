@@ -1,9 +1,13 @@
 import json
 import multiprocessing
+import time
+
 from main import inicio
 
 processos = []
 numeros_wpps = []
+
+#TODO: fazer um for para isso e separar o nome de cada ativo
 
 with open('informacoes_json/dados.json', 'r', encoding='utf-8') as arquivo:
     dados = json.load(arquivo)
@@ -21,7 +25,10 @@ def vamosla():
             processos.append(p)
 
         for p in processos:
+            print()
             p.start()
+            time.sleep(10)
+
 
         for p in processos:
             p.join()

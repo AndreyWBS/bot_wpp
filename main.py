@@ -1,11 +1,9 @@
-import json
 import time
 import datetime
 import pandas as pd
 from interacoes.trabalhando_selenium import UsarSele
 from interacoes.trabalhando_wpp import Wpp
 from interacoes.trabalhando_planilhas import Planilhas
-
 
 
 def pegar_bom():
@@ -22,7 +20,7 @@ def pegar_bom():
 
 
 def verificar_colunas(planilha_df):
-    #print(planilha_df.columns)
+    # print(planilha_df.columns)
     return planilha_df.columns
 
 
@@ -32,7 +30,7 @@ def salvar_palinlha(planilha_df, ativo):
     for coluna in verificar_colunas(planilha_df):
         nova_planilha[str(coluna)] = []
     nova_planilha_df = Planilhas()
-    #print(nova_planilha)
+    # print(nova_planilha)
     novo_caminho = nova_planilha_df.gerar_planilhas(nova_planilha, ativo, caminho)
     return novo_caminho
 
@@ -46,14 +44,20 @@ def atualizar_planilha(caminho, index, planilha_df):
         trabalhando_planilhas.atualizando_planilhas(caminho, coluna_letra, (index + 2), valor_atual)
 
 
-def mandar_mensagem_por_numero(novo_wpp, numeros,dados):
+def mandar_mensagem_por_numero(novo_wpp, numeros, dados):
     numero_principal = dados["numeroPrincipal"]
     mensagem = dados["mensagem"]
+
     ativo = dados["ativo"]
 
     novo_caminho = salvar_palinlha(numeros, ativo)
 
     for i, numero in enumerate(numeros['numero']):
+        for coluna in verificar_colunas(numeros):
+            coluna_str = "["+str(coluna)+"]"
+            trocar = numeros.loc[i, coluna]
+            mensagem2 =str(mensagem).replace(f"{coluna_str}", str(trocar))
+
         novo_wpp.clicar_conversa(numero_principal)
         novo_wpp.escrever_mensagem_txt(str(numero))
 
@@ -64,15 +68,16 @@ def mandar_mensagem_por_numero(novo_wpp, numeros,dados):
 
         bom = pegar_bom()
         novo_wpp.escrever_mensagem_txt2(bom)
-        novo_wpp.escrever_mensagem_txt2(mensagem)
+        novo_wpp.escrever_mensagem_txt2(mensagem2)
 
         atualizar_planilha(novo_caminho, i, numeros)
 
         time.sleep(5)
     pass
 
+
 class inicio:
-    def __init__(self,dados_json):
+    def __init__(self, dados_json):
         self.dados_json = dados_json
 
     def comecar_(self):
@@ -88,7 +93,4 @@ class inicio:
         novo_wpp = Wpp(driver_)
         numeros = pd.read_excel(caminho_planilha)
 
-        mandar_mensagem_por_numero(novo_wpp, numeros,self.dados_json)
-
-
-
+        mandar_mensagem_por_numero(novo_wpp, numeros, self.dados_json)
